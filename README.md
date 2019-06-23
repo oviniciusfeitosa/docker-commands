@@ -90,4 +90,51 @@ Enable swarm mode:
 docker swarm init
 ```
 
+Creating docker virtual machine
+```
+docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2
+```
+
+List Docker Machines
+```
+docker-machine ls
+```
+
+Access Docker Machines
+```
+docker-machine ssh myvm1
+```
+
+Set Docker Machine as Manager:
+```
+docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
+```
+
+Output:
+```
+
+Swarm initialized: current node (0drnc6ulexaajs20z0cbxgm5u) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-824to0hbb6iepvwlopofkb2wmar3u6n47nu5ny42qpy3z36i2g-c9mbey12q7i20xanm9z749afl 192.168.22.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+```
+
+Join a swarm as worker:
+
+```
+docker-machine ssh myvm2 "docker swarm join \
+--token SWMTKN-1-824to0hbb6iepvwlopofkb2wmar3u6n47nu5ny42qpy3z36i2g-c9mbey12q7i20xanm9z749afl \
+192.168.22.100:2377"
+```
+
+Viewing nodes in swarm from manager
+```
+docker-machine ssh myvm1 "docker node ls"
+```
+
 - Guia para iniciantes : [aqui](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
