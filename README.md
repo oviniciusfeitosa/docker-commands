@@ -137,4 +137,28 @@ Viewing nodes in swarm from manager
 docker-machine ssh myvm1 "docker node ls"
 ```
 
+Leaving each node:
+```
+docker swarm leave
+
+or
+
+docker-machine ssh myvm2 "docker swarm leave"
+```
+
+- Deploy your app on the swarm cluster
+
+Show myvm1 machine environments
+```
+docker-machine env myvm1
+```
+
+Setting your machine as active:
+```
+eval $(docker-machine env myvm1)
+
+#
+```
+
+
 - Guia para iniciantes : [aqui](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
