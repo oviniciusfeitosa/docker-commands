@@ -57,6 +57,24 @@ sudo docker logs -f <CONTAINER_ID>
 #### Swarm
 A swarm is a group of machines that are running Docker and joined into a cluster.
 
+Requirements:
+
+- docker-machine
+```
+base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+  sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+```
+
+- docker-machine bash completion (Confirm the version and save scripts to **/etc/bash_completion.d** or /usr/local/etc/bash_completion.d)
+```
+base=https://raw.githubusercontent.com/docker/machine/v0.16.0
+    for i in docker-machine-prompt.bash docker-machine-wrapper.bash docker-machine.bash
+    do
+      sudo wget "$base/contrib/completion/bash/${i}" -P /etc/bash_completion.d
+    done
+```
+
 Enable swarm mode:
 ```
 docker swarm init
