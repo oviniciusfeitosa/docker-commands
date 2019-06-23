@@ -54,4 +54,12 @@ docker-compose build
 sudo docker logs -f <CONTAINER_ID>
 ```
 
+#### Swarm
+A swarm is a group of machines that are running Docker and joined into a cluster.
+
+Enable swarm mode:
+```
+docker swarm init
+```
+
 - Guia para iniciantes : [aqui](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
