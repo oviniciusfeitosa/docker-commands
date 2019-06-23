@@ -75,6 +75,16 @@ base=https://raw.githubusercontent.com/docker/machine/v0.16.0
     done
 ```
 
+- run the command below in your bash:
+```
+source /etc/bash_completion.d/docker-machine-prompt.bash
+```
+
+- add the line below to your **~/.bashrc**
+```
+PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
+```
+
 Enable swarm mode:
 ```
 docker swarm init
