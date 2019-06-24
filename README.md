@@ -118,7 +118,7 @@ eval $(docker-machine env myvm1)
 ### Unsetting docker-machine shell variable settings
 
 ```console
-Unsetting docker-machine shell variable settings
+  eval $(docker-machine env -u)
 ```
 
 ## Swarm
