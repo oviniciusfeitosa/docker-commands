@@ -6,7 +6,8 @@ Docker is a tool designed to make it easier to create, deploy, and run applicati
 
 ### Commands
 
-- List all containers `docker ps -a`
+- List all containers `docker ps -a` or  `docker container ls -a`
+- List available containers `docker ps` or `docker container ls`
 - List available images `docker images` or `docker image ls`
 - Remove container `docker rm`
 - Remove docker imagem `docker rmi`
