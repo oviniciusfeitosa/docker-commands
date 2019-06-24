@@ -51,10 +51,7 @@ ENV https_proxy host:port
 ### Deploy your load-balanced stack
 
 ```console
-docker stack deploy -c docker-compose.yml getstartedlab
-```
-```console
-docker stack deploy -c docker-compose.yml getstartedlab
+docker stack deploy -c docker-compose.yml myAppName
 ```
 
 You can scale the app by changing the replicas value in docker-compose.yml, saving the change, and re-running the docker stack deploy command.
@@ -62,7 +59,7 @@ You can scale the app by changing the replicas value in docker-compose.yml, savi
 ### Take down the app
 
 ```console
-docker stack rm getstartedlab
+docker stack rm myAppName
 ```
 
 ## Docker virtual machine
@@ -106,10 +103,22 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 ```
 
-### Show myvm1 machine environments
+### Setting your machine as active
+
+- Show myvm1 machine environments
 
 ```console
 docker-machine env myvm1
+```
+
+```console
+eval $(docker-machine env myvm1)
+```
+
+### Unsetting docker-machine shell variable settings
+
+```console
+Unsetting docker-machine shell variable settings
 ```
 
 ## Swarm
@@ -186,13 +195,7 @@ docker swarm leave --force
 
 ## Deployment
 
-### Deploy your app on the swarm cluster
-
-Setting your machine as active:
-
-```console
-eval $(docker-machine env myvm1)
-```
+Deploy your app on the swarm cluster
 
 ### Show service id for services of application
 
@@ -206,6 +209,29 @@ docker service ls
 docker service ps myAppName_web
 ```
 
+## Registry
+
+### Login
+
+```console
+docker login registry.example.com
+```
+
+### Deploy to private registry
+
+```console
+docker login registry.example.com
+
+docker stack deploy --with-registry-auth -c docker-compose.yml myAppName
+```
+
+### Accessing your cluster
+
+```console
+docker-machine ls
+
+
+```
 
 ## More
 
