@@ -177,6 +177,12 @@ docker-machine ssh myvm2 "docker swarm join \
 docker-machine ssh myvm1 "docker node ls"
 ```
 
+### Creating directory in swarm from manager
+
+```console
+docker-machine ssh myvm1 "mkdir ./data"
+```
+
 ### Leaving each node
 
 ```console
