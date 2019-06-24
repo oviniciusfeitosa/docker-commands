@@ -242,3 +242,9 @@ docker-machine ls
 ## More
 
 More information [here](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
+
+## Reference
+
+1. [https://docs.docker.com](https://docs.docker.com)
+2. [https://github.com/docker](https://github.com/docker)
+3. [https://opensource.com/resources/what-docker](https://opensource.com/resources/what-docker)
