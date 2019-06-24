@@ -1,63 +1,50 @@
-# Comandos mais utilizados no Docker
+# Docker basic commands
 
-#### Lista a situação dos containers atuais
-```
-docker ps -a
-```
+## Docker
+- List all containers `docker ps -a`
+- List available images `docker images `
+- Remove container `docker rm`
+- Remove docker imagem `docker rmi`
+- Download, create a container using a local image or from default registry `docker run -v /var/www:/var/www -p 80:80 vinnyfs89/{image}`
+- Start container `docker start`
+- Stop container `docker stop`
+- Attach container `docker attach (image_id) --sig-proxy=false`
+  * CTRL + P + Q = exits terminal without container dropout
+- Container logs `sudo docker logs -f <CONTAINER_ID> `
 
-#### Lista as imagens disponíveis
-```
-docker images 
-```
-
-#### Remove um container
-```
-docker rm
-```
-
-#### Remove uma imagem
-```
-docker rmi
-```
-
-#### Baixa, cria container e executa uma imagem local ou à partir do hub.docker.com
-```
-docker run -v /var/www:/var/www -p 80:80 vinnyfs89/{image} 
-```
-
-#### Inicia um container existente
-```
-docker start
-```
-
-#### Interrompe um container existente
-```
-docker stop
-```
-
-#### Entra em um container
-```
-docker attach (image_id) --sig-proxy=false
-  * CTRL + P + Q = sair do terminal sem derrubar o container
-  * docker attach --sig-proxy=true
-```
-
-#### Docker-Compose Commands
+## Docker-Compose Commands
 ```
 docker-compose up -d --build
 docker-compose stop
 docker-compose build
 ```
 
-#### Log do container
+## Setting Http or Https Proxies
+
 ```
-sudo docker logs -f <CONTAINER_ID>
+# Dockerfile
+# ... 
+
+ENV http_proxy host:port
+ENV https_proxy host:port
+
+# ... 
 ```
 
-#### Swarm
+## Setting custom DNS
+- `touch /etc/docker/daemon.json`
+```
+{
+  "dns": ["your_dns_address", "8.8.8.8"]
+}
+```
+- Restart docker service `sudo service docker restart`
+
+
+## Swarm
 A swarm is a group of machines that are running Docker and joined into a cluster.
 
-Requirements:
+#### Requirements:
 
 - docker-machine
 ```
@@ -85,28 +72,28 @@ source /etc/bash_completion.d/docker-machine-prompt.bash
 PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 ```
 
-Enable swarm mode:
+#### Enable swarm mode:
 ```
 docker swarm init
 ```
 
-Creating docker virtual machine
+#### Creating docker virtual machine
 ```
 docker-machine create --driver virtualbox myvm1
 docker-machine create --driver virtualbox myvm2
 ```
 
-List Docker Machines
+#### List Docker Machines
 ```
 docker-machine ls
 ```
 
-Access Docker Machines
+#### Access Docker Machines
 ```
 docker-machine ssh myvm1
 ```
 
-Set Docker Machine as Manager:
+#### Set Docker Machine as Manager:
 ```
 docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
 ```
@@ -124,7 +111,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 ```
 
-Join a swarm as worker:
+#### Join a swarm as worker:
 
 ```
 docker-machine ssh myvm2 "docker swarm join \
@@ -132,12 +119,12 @@ docker-machine ssh myvm2 "docker swarm join \
 192.168.22.100:2377"
 ```
 
-Viewing nodes in swarm from manager
+#### Viewing nodes in swarm from manager
 ```
 docker-machine ssh myvm1 "docker node ls"
 ```
 
-Leaving each node:
+#### Leaving each node:
 ```
 docker swarm leave
 
@@ -146,7 +133,8 @@ or
 docker-machine ssh myvm2 "docker swarm leave"
 ```
 
-- Deploy your app on the swarm cluster
+#### 
+Deploy your app on the swarm cluster
 
 Show myvm1 machine environments
 ```
