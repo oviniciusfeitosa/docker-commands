@@ -7,10 +7,10 @@ Docker is a tool designed to make it easier to create, deploy, and run applicati
 ### Commands
 
 - List all containers `docker ps -a`
-- List available images `docker images`
+- List available images `docker images` or `docker image ls`
 - Remove container `docker rm`
 - Remove docker imagem `docker rmi`
-- Download, create a container using a local image or from default registry 
+- Download, create a container using a local image or from default registry
   - Example 1 `docker run -p 4000:80 friendlyhello:latest`
   - Example 2 `docker run -v /var/www:/var/www -p 80:80 vinnyfs89/{image}`
 - Start container `docker start`
