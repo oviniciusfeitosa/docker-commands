@@ -16,14 +16,6 @@
 - Container logs `sudo docker logs -f <CONTAINER_ID>`
 - Build Docker  images `docker build --tag image:tag .`
 
-## Docker-Compose Commands
-
-```console
-  docker-compose up -d --build
-  docker-compose stop
-  docker-compose build
-```
-
 ## Setting Http or Https Proxies
 
 ```console
@@ -48,11 +40,83 @@ ENV https_proxy host:port
 
 - Restart docker service `sudo service docker restart`
 
+## Docker-Compose
+
+```console
+  docker-compose up -d --build
+  docker-compose stop
+  docker-compose build
+```
+
+### Deploy your load-balanced stack
+
+```console
+docker stack deploy -c docker-compose.yml getstartedlab
+```
+```console
+docker stack deploy -c docker-compose.yml getstartedlab
+```
+
+You can scale the app by changing the replicas value in docker-compose.yml, saving the change, and re-running the docker stack deploy command.
+
+### Take down the app
+
+```console
+docker stack rm getstartedlab
+```
+
+## Docker virtual machine
+
+### Creating docker virtual machine
+
+```console
+docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2
+```
+
+### List Docker Machines
+
+```console
+docker-machine ls
+```
+
+### Access Docker Machines
+
+```console
+docker-machine ssh myvm1
+```
+
+### Set Docker Machine as Manager
+
+```console
+docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
+```
+
+Output:
+
+```console
+
+Swarm initialized: current node (0drnc6ulexaajs20z0cbxgm5u) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-824to0hbb6iepvwlopofkb2wmar3u6n47nu5ny42qpy3z36i2g-c9mbey12q7i20xanm9z749afl 192.168.22.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+```
+
+### Show myvm1 machine environments
+
+```console
+docker-machine env myvm1
+```
+
 ## Swarm
 
 A swarm is a group of machines that are running Docker and joined into a cluster.
 
-#### Requirements:
+### Requirements
 
 - docker-machine
 
@@ -80,56 +144,17 @@ source /etc/bash_completion.d/docker-machine-prompt.bash
 
 - add the line below to your **~/.bashrc**
 
-```
+```console
 PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 ```
 
-#### Enable swarm mode:
+### Enable swarm mode
 
 ```console
 docker swarm init
 ```
 
-#### Creating docker virtual machine
-
-```console
-docker-machine create --driver virtualbox myvm1
-docker-machine create --driver virtualbox myvm2
-```
-
-#### List Docker Machines
-
-```console
-docker-machine ls
-```
-
-#### Access Docker Machines
-
-```console
-docker-machine ssh myvm1
-```
-
-#### Set Docker Machine as Manager:
-
-```console
-docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
-```
-
-Output:
-
-```console
-
-Swarm initialized: current node (0drnc6ulexaajs20z0cbxgm5u) is now a manager.
-
-To add a worker to this swarm, run the following command:
-
-    docker swarm join --token SWMTKN-1-824to0hbb6iepvwlopofkb2wmar3u6n47nu5ny42qpy3z36i2g-c9mbey12q7i20xanm9z749afl 192.168.22.100:2377
-
-To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
-
-```
-
-#### Join a swarm as worker:
+### Join a swarm as worker
 
 ```console
 docker-machine ssh myvm2 "docker swarm join \
@@ -137,13 +162,13 @@ docker-machine ssh myvm2 "docker swarm join \
 192.168.22.100:2377"
 ```
 
-#### Viewing nodes in swarm from manager
+### Viewing nodes in swarm from manager
 
 ```console
 docker-machine ssh myvm1 "docker node ls"
 ```
 
-#### Leaving each node:
+### Leaving each node
 
 ```console
 docker swarm leave
@@ -153,13 +178,15 @@ or
 docker-machine ssh myvm2 "docker swarm leave"
 ```
 
-## Deploy your app on the swarm cluster
-
-Show myvm1 machine environments
+### Take down the swarm
 
 ```console
-docker-machine env myvm1
+docker swarm leave --force
 ```
+
+## Deployment
+
+### Deploy your app on the swarm cluster
 
 Setting your machine as active:
 
@@ -167,10 +194,19 @@ Setting your machine as active:
 eval $(docker-machine env myvm1)
 ```
 
-### Deploy your stack
+### Show service id for services of application
 
 ```console
-docker stack deploy -c docker-compose.yml getstartedlab
+docker service ls
 ```
 
-- Guia para iniciantes : [aqui](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
+### Show services of started docker-compose stack
+
+```console
+docker service ps myAppName_web
+```
+
+
+## More
+
+More information [here](https://github.com/vinnyfs89/dockerCommands/blob/master/docker-160827013030.pdf) ou diretamente pelo [Slideshare](http://pt.slideshare.net/vinnyfs89/docker-essa-baleia-vai-te-conquistar?qid=aed7b752-f313-4515-badd-f3bf811c8a35&v=&b=&from_search=1)
