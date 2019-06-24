@@ -5,12 +5,16 @@
 - List available images `docker images `
 - Remove container `docker rm`
 - Remove docker imagem `docker rmi`
-- Download, create a container using a local image or from default registry `docker run -v /var/www:/var/www -p 80:80 vinnyfs89/{image}`
+- Download, create a container using a local image or from default registry 
+  - Example 1 `docker run -p 4000:80 friendlyhello:latest`
+  - Example 2 `docker run -v /var/www:/var/www -p 80:80 vinnyfs89/{image}`
 - Start container `docker start`
 - Stop container `docker stop`
 - Attach container `docker attach (image_id) --sig-proxy=false`
   * CTRL + P + Q = exits terminal without container dropout
 - Container logs `sudo docker logs -f <CONTAINER_ID> `
+- Build Docker  images `docker build --tag image:tag .`
+
 
 ## Docker-Compose Commands
 ```
